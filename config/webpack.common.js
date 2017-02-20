@@ -265,6 +265,7 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
+        { from: 'node_modules/ag-grid/dist/styles/', to: 'assets/ag-grid' },
         { from: 'src/assets', to: 'assets' },
         { from: 'src/meta'}
       ]),
@@ -356,6 +357,10 @@ module.exports = function (options) {
         disabled: !AOT,
         tsConfig: helpers.root('tsconfig.webpack.json'),
         resourceOverride: helpers.root('config/resource-override.js')
+      }),
+
+      new webpack.ProvidePlugin({
+        faker: "faker"
       })
 
     ],
