@@ -49,7 +49,7 @@ const APP_PROVIDERS = [
 ];
 
 type StoreType = {
-  rootState: any,
+  rootState: AppState,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
 };
@@ -87,7 +87,7 @@ export class AppModule {
 
   constructor(
     public appRef: ApplicationRef,
-    private _store: Store<AppState>
+    private store: Store<AppState>
   ) {}
 
   public hmrOnInit(store: StoreType) {
@@ -97,7 +97,7 @@ export class AppModule {
 
     // restore state by dispatch a SET_ROOT_STATE action
     if (store.rootState) {
-      this._store.dispatch({
+      this.store.dispatch({
         type: 'SET_ROOT_STATE',
         payload: store.rootState
       });
@@ -110,7 +110,7 @@ export class AppModule {
 
   public hmrOnDestroy(store: StoreType) {
     const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
-    this._store.take(1).subscribe((s) => store.rootState = s);
+    this.store.take(1).subscribe((s) => store.rootState = s);
     // recreate root elements
     store.disposeOldHosts = createNewHosts(cmpLocation);
     // save input values
