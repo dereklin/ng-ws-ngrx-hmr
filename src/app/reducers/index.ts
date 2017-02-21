@@ -37,6 +37,7 @@ import { combineReducers } from '@ngrx/store';
  * notation packages up all of the exports into a single object.
  */
 import * as fromStudent from './student';
+import * as fromRoot from './root';
 
 
 /**
@@ -45,6 +46,7 @@ import * as fromStudent from './student';
  */
 export interface State {
   student: fromStudent.State;
+  root: fromRoot.State;
 }
 
 
@@ -56,17 +58,28 @@ export interface State {
  * the result from right to left.
  */
 const reducers = {
-  student: fromStudent.reducer
+  student: fromStudent.reducer,
+  root: fromRoot.reducer
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
+// Generate a reducer to set the root state in dev mode for HMR
+function stateSetter(reducer: ActionReducer<any>): ActionReducer<any> {
+  return (state, action) => {
+    if (action.type === 'SET_ROOT_STATE') {
+      return action.payload;
+    }
+    return reducer(state, action);
+  };
+}
+
+const developmentReducer: ActionReducer<State> =
+  compose(stateSetter, storeFreeze, combineReducers)(reducers);
 const productionReducer: ActionReducer<State> = combineReducers(reducers);
 
 export function reducer(state: any, action: any) {
   if (process.env.ENV === 'production') {
     return productionReducer(state, action);
-  }
-  else {
+  } else {
     return developmentReducer(state, action);
   }
 }
@@ -88,6 +101,7 @@ export function reducer(state: any, action: any) {
  * ```
  */
 export const getStudentState = (state: State) => state.student;
+export const getRootState = (state: State) => state.root;
 
 /**
  * Every reducer module exports selector functions, however child reducers
@@ -100,3 +114,4 @@ export const getStudentState = (state: State) => state.student;
  * pieces of state.
  */
  export const getStudents = createSelector(getStudentState, fromStudent.getStudents);
+ export const getRoot = createSelector(getRootState, fromRoot.getRootState);

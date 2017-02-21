@@ -6,7 +6,6 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import { AppState } from './app.service';
 
 /*
  * App Component
@@ -32,11 +31,10 @@ export class AppComponent implements OnInit {
   public url = 'https://twitter.com/AngularClass';
 
   constructor(
-    public appState: AppState
+    
   ) {}
 
   public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
   }
 
 }
