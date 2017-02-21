@@ -16,7 +16,6 @@ import { of } from 'rxjs/observable/of';
 import { GoogleBooksService } from '../services/google-books';
 import * as student from '../actions/student';
 
-
 /**
  * Effects offer a way to isolate and easily test side-effects within your
  * application. StateUpdates is an observable of the latest state and
@@ -33,11 +32,8 @@ import * as student from '../actions/student';
 
 @Injectable()
 export class StudentEffects {
-  constructor(private actions$: Actions, private studentService: StudentService) { }
-
-
   @Effect()
-  load$: Observable<Action> = this.actions$
+  private load$: Observable<Action> = this.actions$
     .ofType(student.LOAD_STUDENTS)
     .delay(1000)
     .switchMap(() => {
@@ -46,4 +42,6 @@ export class StudentEffects {
     .map((students: any[]) => {
       return new student.LoadStudentAction(students);
     });
+
+  constructor(private actions$: Actions, private studentService: StudentService) { }
 }

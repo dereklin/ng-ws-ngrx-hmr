@@ -28,8 +28,6 @@ import { storeFreeze } from 'ngrx-store-freeze';
  * More: https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
  */
 import { combineReducers } from '@ngrx/store';
-
-
 /**
  * Every reducer module's default export is the reducer function itself. In
  * addition, each module should export a type or interface that describes
@@ -37,18 +35,13 @@ import { combineReducers } from '@ngrx/store';
  * notation packages up all of the exports into a single object.
  */
 import * as fromStudent from './student';
-import * as fromRoot from './root';
-
-
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
   student: fromStudent.State;
-  root: fromRoot.State;
 }
-
 
 /**
  * Because metareducers take a reducer function and return a new reducer,
@@ -59,7 +52,6 @@ export interface State {
  */
 const reducers = {
   student: fromStudent.reducer,
-  root: fromRoot.reducer
 };
 
 // Generate a reducer to set the root state in dev mode for HMR
@@ -84,7 +76,6 @@ export function reducer(state: any, action: any) {
   }
 }
 
-
 /**
  * A selector function is a map function factory. We pass it parameters and it
  * returns a function that maps from the larger state tree into a smaller
@@ -101,7 +92,6 @@ export function reducer(state: any, action: any) {
  * ```
  */
 export const getStudentState = (state: State) => state.student;
-export const getRootState = (state: State) => state.root;
 
 /**
  * Every reducer module exports selector functions, however child reducers
@@ -114,4 +104,3 @@ export const getRootState = (state: State) => state.root;
  * pieces of state.
  */
  export const getStudents = createSelector(getStudentState, fromStudent.getStudents);
- export const getRoot = createSelector(getRootState, fromRoot.getRootState);

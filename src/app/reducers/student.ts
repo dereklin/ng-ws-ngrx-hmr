@@ -1,6 +1,5 @@
 import * as student from '../actions/student';
 
-
 export interface State {
   students: any[];
 }

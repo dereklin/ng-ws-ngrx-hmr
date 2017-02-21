@@ -32,8 +32,6 @@ import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
-
-
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
@@ -41,7 +39,7 @@ import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducer, State as AppState } from './reducers';
 import { Store } from '@ngrx/store';
-import * as root from './actions/root';
+// import * as root from './actions/root';
 import 'rxjs/add/operator/take';
 import '../styles/styles.scss';
 import '../styles/headings.css';
@@ -102,7 +100,10 @@ export class AppModule {
     if (store.rootState) {
       console.log('rootState', store.rootState);
       console.log('dispatching set root state');
-      this._store.dispatch(new root.SetRootStateAction(store.rootState));
+      this._store.dispatch({
+        type: 'SET_ROOT_STATE',
+        payload: store.rootState
+      });
     }
 
     if ('restoreInputValues' in store) { store.restoreInputValues(); }
