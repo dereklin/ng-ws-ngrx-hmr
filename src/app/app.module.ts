@@ -97,8 +97,6 @@ export class AppModule {
 
     // restore state by dispatch a SET_ROOT_STATE action
     if (store.rootState) {
-      console.log('rootState', store.rootState);
-      console.log('dispatching set root state');
       this._store.dispatch({
         type: 'SET_ROOT_STATE',
         payload: store.rootState
@@ -111,7 +109,6 @@ export class AppModule {
   }
 
   public hmrOnDestroy(store: StoreType) {
-    console.log('hmr destroyed');
     const cmpLocation = this.appRef.components.map((cmp) => cmp.location.nativeElement);
     this._store.take(1).subscribe((s) => store.rootState = s);
     // recreate root elements
