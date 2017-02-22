@@ -29,21 +29,20 @@ export class AgComponent implements OnInit, OnDestroy {
         {field: 'email', headerName: 'Email'}
       ],
       enableRangeSelection: true,
-      rowSelection: 'multiple',
-      enableStatusBar: true
-
+      rowSelection: 'multiple'
     };
     this.studentTableData$ = this.store.select(fromRoot.getStudents);
   }
 
   public ngOnInit() {
-    let getStudentDataSub = this.studentService.getStudents().subscribe((res) => {
+    this.getStudentDataSub = this.studentService.getStudents().subscribe((res) => {
       this.store.dispatch(new student.LoadStudentAction(res));
     });
   }
 
   public ngOnDestroy() {
     this.getStudentDataSub.unsubscribe();
+    this.store.dispatch(new student.StopLoadingAction());
   }
 
 }

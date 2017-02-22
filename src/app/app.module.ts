@@ -1,7 +1,9 @@
+import { CoreModule } from './core';
 import { ReflectGetOwnMetadataKeysOrderWithoutTargetKey } from 'reflect-metadata/temp/test/spec';
 import { StudentEffects } from './effects/student';
 import { StudentService } from './services/student.service';
 import { AgModule } from './ag/ag.module';
+import { HomeModule } from './home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -27,10 +29,8 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
-import { XLargeDirective } from './home/x-large';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
@@ -62,15 +62,15 @@ type StoreType = {
   declarations: [
     AppComponent,
     AboutComponent,
-    HomeComponent,
-    NoContentComponent,
-    XLargeDirective
+    NoContentComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules }),
+    CoreModule,
+    HomeModule,
     AgModule,
     StoreModule.provideStore(reducer),
     RouterStoreModule.connectRouter(),

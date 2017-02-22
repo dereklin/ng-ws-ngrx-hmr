@@ -37,7 +37,8 @@ module.exports = {
     /** <link> tags for a Web App Manifest **/
     { rel: 'manifest', href: '/assets/manifest.json' },
     { rel: 'stylesheet', href: '/assets/ag-grid/ag-grid.css' },
-    { rel: 'stylesheet', href: '/assets/ag-grid/theme-fresh.css' }
+    { rel: 'stylesheet', href: '/assets/ag-grid/theme-fresh.css' },
+    { rel: 'stylesheet', href: '/assets/bootstrap/bootstrap.css' }
   ],
   meta: [
     { name: 'msapplication-TileColor', content: '#00bcd4' },

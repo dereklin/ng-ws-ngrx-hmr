@@ -18,11 +18,7 @@ import {
     './app.component.css'
   ],
   template: `
-
-
-    <main>
       <router-outlet></router-outlet>
-    </main>
   `
 })
 export class AppComponent {

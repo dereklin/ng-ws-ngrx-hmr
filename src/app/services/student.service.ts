@@ -7,7 +7,7 @@ export class StudentService {
 
   public getStudents(): Observable<any[]> {
     let data = [];
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 10; i++) {
       data.push({
         name: faker.name.findName(),
         account: faker.finance.account(),
@@ -17,7 +17,9 @@ export class StudentService {
         email: faker.internet.email()
         });
     }
+
     return Observable.create((observer) => {
+      console.log('student service mimicing http call');
       observer.next(data);
     });
   }

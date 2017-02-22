@@ -6,15 +6,19 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/takeUntil';
+import 'rxjs/add/operator/withLatestFrom';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/throttleTime';
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
 import { of } from 'rxjs/observable/of';
 
 import { GoogleBooksService } from '../services/google-books';
 import * as student from '../actions/student';
+import * as fromRoot from '../reducers';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
@@ -34,8 +38,10 @@ import * as student from '../actions/student';
 export class StudentEffects {
   @Effect()
   private load$: Observable<Action> = this.actions$
-    .ofType(student.LOAD_STUDENTS)
+    .ofType(student.ActionTypes.LOAD_STUDENTS)
     .delay(1000)
+    .withLatestFrom(this.store, (action, state) => state.student.loading)
+    .filter((x) => x)
     .switchMap(() => {
       return this.studentService.getStudents();
     })
@@ -43,5 +49,6 @@ export class StudentEffects {
       return new student.LoadStudentAction(students);
     });
 
-  constructor(private actions$: Actions, private studentService: StudentService) { }
+  constructor(private actions$: Actions,
+              private store: Store<fromRoot.State>, private studentService: StudentService) { }
 }
