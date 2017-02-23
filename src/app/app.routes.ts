@@ -1,3 +1,4 @@
+import { PDataComponent } from './p-data/p-data.component';
 import { HomeComponent } from './home/home.component';
 import { AgComponent } from './ag/ag.component';
 import { NotFoundPageComponent } from './core/not-found-page';
@@ -16,6 +17,7 @@ export const ROUTES: Routes = [
       {path: '',   redirectTo: '/home', pathMatch: 'full' },
       {path: 'home', component: HomeComponent},
       {path: 'ag', component: AgComponent},
+      {path: 'pd', component: PDataComponent},
       {path: '**', component: NotFoundPageComponent}
     ]
   }

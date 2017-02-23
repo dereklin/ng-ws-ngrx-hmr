@@ -7,7 +7,7 @@ export class StudentService {
 
   public getStudents(): Observable<any[]> {
     let data = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1000; i++) {
       data.push({
         name: faker.name.findName(),
         account: faker.finance.account(),

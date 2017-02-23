@@ -1,3 +1,4 @@
+import { PDataModule } from './p-data';
 import { CoreModule } from './core';
 import { ReflectGetOwnMetadataKeysOrderWithoutTargetKey } from 'reflect-metadata/temp/test/spec';
 import { StudentEffects } from './effects/student';
@@ -72,6 +73,7 @@ type StoreType = {
     CoreModule,
     HomeModule,
     AgModule,
+    PDataModule,
     StoreModule.provideStore(reducer),
     RouterStoreModule.connectRouter(),
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
