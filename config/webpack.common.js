@@ -265,7 +265,7 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
-        { from: 'node_modules/primeng', to: 'assets/primeng' },
+        { from: 'node_modules/primeng/resources', to: 'assets/primeng/resources' },
         { from: 'node_modules/bootstrap/dist/css/', to: 'assets/bootstrap' },
         { from: 'node_modules/ag-grid/dist/styles/', to: 'assets/ag-grid' },
         { from: 'src/assets', to: 'assets' },
