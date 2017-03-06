@@ -1,6 +1,5 @@
 import { type } from '../util';
 import { Action } from '@ngrx/store';
-import { State as AppState } from '../reducers';
 
 /**
  * For each action type in an action group, make a simple
@@ -27,19 +26,3 @@ export class StopLoadingAction implements Action {
 
 export type Actions
   = LoadStudentAction | StopLoadingAction;
-
-/*
-export type Actions
-  = SetRootStateAction;
-
-import { Action } from '@ngrx/store';
-export const LOAD_STUDENTS =  '[Student] Load';
-
-export class  LoadStudentAction implements Action {
-  public readonly type = LOAD_STUDENTS;
-  constructor(public payload: any[]) { }
-}
-
-export type Actions
-  = LoadStudentAction;
-*/

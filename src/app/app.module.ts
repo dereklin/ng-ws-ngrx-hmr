@@ -30,8 +30,6 @@ import { ROUTES } from './app.routes';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AboutComponent } from './about';
-import { NoContentComponent } from './no-content';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
@@ -61,9 +59,7 @@ type StoreType = {
 @NgModule({
   bootstrap: [ AppComponent ],
   declarations: [
-    AppComponent,
-    AboutComponent,
-    NoContentComponent
+    AppComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
